@@ -1,51 +1,26 @@
 use anyhow::Result;
-use opencv::{
-    core::{Mat, Vector},
-    highgui,
-    prelude::*,
-    videoio::{VideoCapture, CAP_V4L2},
-};
+use opencv::{core::Mat, highgui, prelude::*, videoio::VideoCapture};
 
 fn main() -> Result<()> {
-    let mut ready_index = Vector::new();
-    let mut caps = Vector::new();
-    caps.push(VideoCapture::new(0, CAP_V4L2)?);
+    let mut cap = VideoCapture::from_file("test.mp4", opencv::videoio::CAP_ANY)?;
 
-    if !VideoCapture::wait_any(&caps, &mut ready_index, 0)? {
-        println!("can't find camera");
-        return Ok(());
-    }
+    let window_name = "play-mp4";
+    highgui::named_window(&window_name, highgui::WINDOW_NORMAL)?;
+    highgui::resize_window(&window_name, 640, 480)?;
 
-    println!("ready_index: {ready_index:?}");
+    let mut img = Mat::default();
+    loop {
+        if let Ok(true) = cap.read(&mut img) {
+            highgui::imshow(window_name, &img)?;
+        }
 
-    let mut windows = vec![];
-    for (index, _) in caps.iter().enumerate() {
-        let window_name = format!("capvideo-{}", index);
-        highgui::named_window(&window_name, highgui::WINDOW_NORMAL)?;
-        highgui::resize_window(&window_name, 640, 480)?;
-        windows.push(window_name);
-    }
-
-    'out: loop {
-        for index in ready_index.iter() {
-            let index = index as usize;
-            let mut img = Mat::default();
-
-            if let Ok(true) = caps.get(index).unwrap().read(&mut img) {
-                highgui::imshow(&windows[index], &img)?;
-            }
-
-            let key = highgui::wait_key(5)?;
-            if key & 0xFF == 'q' as i32 {
-                break 'out;
-            }
+        let key = highgui::wait_key(40)?;
+        if key & 0xFF == 'q' as i32 {
+            break;
         }
     }
 
-    for (index, _) in caps.iter().enumerate() {
-        caps.get(index as usize).unwrap().release()?;
-    }
-
+    cap.release()?;
     highgui::destroy_all_windows()?;
 
     Ok(())

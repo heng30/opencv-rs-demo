@@ -26,3 +26,7 @@ path = "src/bin/img-write.rs"
 [[bin]]
 name = "capvideo"
 path = "src/bin/capvideo.rs"
+
+[[bin]]
+name = "play-mp4"
+path = "src/bin/play-mp4.rs"
