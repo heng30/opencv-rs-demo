@@ -11,6 +11,7 @@ fn main() -> Result<()> {
     let mut caps = Vector::new();
     caps.push(VideoCapture::new(0, CAP_V4L2)?);
 
+    // get all ready index
     if !VideoCapture::wait_any(&caps, &mut ready_index, 0)? {
         println!("can't find camera");
         return Ok(());
@@ -18,6 +19,7 @@ fn main() -> Result<()> {
 
     println!("ready_index: {ready_index:?}");
 
+    // create windows for each camera
     let mut windows = vec![];
     for (index, _) in caps.iter().enumerate() {
         let window_name = format!("capvideo-{}", index);
@@ -26,6 +28,7 @@ fn main() -> Result<()> {
         windows.push(window_name);
     }
 
+    // show cameras' capture
     'out: loop {
         for index in ready_index.iter() {
             let index = index as usize;
