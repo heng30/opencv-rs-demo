@@ -13,6 +13,9 @@ run-release:
 realse:
 	nix-shell --run "cargo build --release --bin main"
 
+git-action-test:
+	cargo run --bin git-action-test
+
 clean:
 	cargo clean
 
