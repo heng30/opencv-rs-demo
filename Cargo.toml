@@ -20,12 +20,20 @@ name = "window"
 path = "src/bin/window.rs"
 
 [[bin]]
+name = "mouse"
+path = "src/bin/mouse.rs"
+
+[[bin]]
+name = "trackbar"
+path = "src/bin/trackbar.rs"
+
+[[bin]]
 name = "img-write"
 path = "src/bin/img-write.rs"
 
 [[bin]]
-name = "capvideo"
-path = "src/bin/capvideo.rs"
+name = "camera"
+path = "src/bin/camera.rs"
 
 [[bin]]
 name = "play-mp4"
