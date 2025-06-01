@@ -30,3 +30,7 @@ path = "src/bin/capvideo.rs"
 [[bin]]
 name = "play-mp4"
 path = "src/bin/play-mp4.rs"
+
+[[bin]]
+name = "save-camera"
+path = "src/bin/save-camera.rs"
