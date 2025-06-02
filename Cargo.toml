@@ -42,3 +42,7 @@ path = "src/bin/play-mp4.rs"
 [[bin]]
 name = "save-camera"
 path = "src/bin/save-camera.rs"
+
+[[bin]]
+name = "color-space"
+path = "src/bin/color-space.rs"
