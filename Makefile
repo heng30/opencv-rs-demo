@@ -16,9 +16,6 @@ debug-nix:
 realse:
 	cargo build --release --bin $(bin)
 
-nix-develop:
-	nix develop
-
 nix-shell:
 	nix-shell
 

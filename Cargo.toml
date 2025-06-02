@@ -51,3 +51,31 @@ path = "src/bin/color-space.rs"
 [[bin]]
 name = "ndarray-demo"
 path = "src/bin/ndarray-demo.rs"
+
+[[bin]]
+name = "split-merge-img"
+path = "src/bin/split-merge-img.rs"
+
+[[bin]]
+name = "draw-line"
+path = "src/bin/draw-line.rs"
+
+[[bin]]
+name = "draw-rectangle"
+path = "src/bin/draw-rectangle.rs"
+
+[[bin]]
+name = "draw-circle"
+path = "src/bin/draw-circle.rs"
+
+[[bin]]
+name = "draw-ellipse"
+path = "src/bin/draw-ellipse.rs"
+
+[[bin]]
+name = "draw-polylines"
+path = "src/bin/draw-polylines.rs"
+
+[[bin]]
+name = "draw-text"
+path = "src/bin/draw-text.rs"

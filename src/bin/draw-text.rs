@@ -9,12 +9,12 @@ fn main() -> Result<()> {
     opencv::imgproc::put_text(
         &mut img,
         "Hello World!",
-        opencv::core::Point::new(100, 100),
-        opencv::imgproc::HersheyFonts::FONT_HERSHEY_PLAIN.into(),
+        opencv::core::Point::new(100, 200),
+        opencv::imgproc::HersheyFonts::FONT_HERSHEY_COMPLEX.into(),
         2.,
         opencv::core::Scalar::new(0., 255., 255., 0.),
         1,
-        opencv::imgproc::LINE_4,
+        opencv::imgproc::LINE_AA,
         false,
     )?;
 
