@@ -23,6 +23,8 @@
           buildInputs = with pkgs; [
             gtk2
             gtk3
+            gtk2.dev
+            gtk3.dev
             libclang
             glib
             pango

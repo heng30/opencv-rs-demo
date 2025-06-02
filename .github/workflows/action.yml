@@ -25,7 +25,7 @@ jobs:
       - run: echo "end install Rust..."
 
       - run: echo "start build..."
-      - run: make git-action-test
+      - run: make
       - run: echo "end build..."
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
