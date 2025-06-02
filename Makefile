@@ -5,17 +5,22 @@ bin ?= main
 all: debug
 
 debug:
+	cargo run --bin $(bin)
+
+debug-nix:
 	nix-shell --run "cargo run --bin $(bin)"
 
 run-release:
-	nix-shell --run "cargo run --release --bin $(bin)"
+	cargo run --release --bin $(bin)
 
 realse:
-	nix-shell --run "cargo build --release --bin main"
+	cargo build --release --bin $(bin)
 
 git-action-test:
 	cargo run --bin git-action-test
 
+nix-develop:
+	nix develop
+
 clean:
 	cargo clean
-

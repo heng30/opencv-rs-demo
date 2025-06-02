@@ -35,7 +35,13 @@ fn main() -> Result<()> {
 
     loop {
         let pos = highgui::get_trackbar_pos(trackbar_name, window_name)? as usize;
-        opencv::imgproc::cvt_color(&src_img, &mut dst_img, color_space[pos].into(), 0)?;
+        opencv::imgproc::cvt_color(
+            &src_img,
+            &mut dst_img,
+            color_space[pos].into(),
+            0,
+            // opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+        )?;
 
         highgui::imshow(window_name, &dst_img)?;
 

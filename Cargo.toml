@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0"
+ndarray = "0.16"
 opencv = "0.94"
 
 [[bin]]
@@ -46,3 +47,7 @@ path = "src/bin/save-camera.rs"
 [[bin]]
 name = "color-space"
 path = "src/bin/color-space.rs"
+
+[[bin]]
+name = "ndarray-demo"
+path = "src/bin/ndarray-demo.rs"
