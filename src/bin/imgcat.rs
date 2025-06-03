@@ -3,7 +3,7 @@ use opencv::{core, highgui, imgcodecs, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-roi-merge";
+    let window_name = "imgmerge";
     let img1 = imgcodecs::imread("color.png", imgcodecs::IMREAD_COLOR)?;
     let img2 = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
 
@@ -11,13 +11,14 @@ fn main() -> Result<()> {
         anyhow::bail!("Images must have the same dimensions");
     }
 
-    // Define ROI (Region of Interest) where to place the overlay
-    let roi = core::Rect::new(200, 200, 500, 500);
-    let roi_img1 = core::Mat::roi(&img1, roi)?;
-    let roi_img2 = core::Mat::roi(&img2, roi)?;
+    let mut h_result1 = core::Mat::default();
+    core::hconcat2(&img1, &img2, &mut h_result1)?;
+
+    let mut h_result2 = core::Mat::default();
+    core::hconcat2(&img2, &img1, &mut h_result2)?;
 
     let mut result = core::Mat::default();
-    core::add_weighted(&roi_img1, 0.8, &roi_img2, 0.2, 0.0, &mut result, -1)?;
+    core::vconcat2(&h_result1, &h_result2, &mut result)?;
 
     highgui::named_window(window_name, highgui::WINDOW_NORMAL)?;
     highgui::resize_window(window_name, w, h)?;

@@ -79,3 +79,27 @@ path = "src/bin/draw-polylines.rs"
 [[bin]]
 name = "draw-text"
 path = "src/bin/draw-text.rs"
+
+[[bin]]
+name = "draw-shape"
+path = "src/bin/draw-shape.rs"
+
+[[bin]]
+name = "imgadd"
+path = "src/bin/imgadd.rs"
+
+[[bin]]
+name = "imgsub"
+path = "src/bin/imgsub.rs"
+
+[[bin]]
+name = "imgmerge"
+path = "src/bin/imgmerge.rs"
+
+[[bin]]
+name = "img-roi-merge"
+path = "src/bin/img-roi-merge.rs"
+
+[[bin]]
+name = "imgcat"
+path = "src/bin/imgcat.rs"

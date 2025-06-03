@@ -3,7 +3,7 @@ use opencv::{core, highgui, imgcodecs, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-roi-merge";
+    let window_name = "img-cut-merge";
     let img1 = imgcodecs::imread("color.png", imgcodecs::IMREAD_COLOR)?;
     let img2 = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
 
