@@ -103,3 +103,27 @@ path = "src/bin/img-roi-merge.rs"
 [[bin]]
 name = "imgcat"
 path = "src/bin/imgcat.rs"
+
+[[bin]]
+name = "img-bitwise-not"
+path = "src/bin/img-bitwise-not.rs"
+
+[[bin]]
+name = "img-bitwise-and"
+path = "src/bin/img-bitwise-and.rs"
+
+[[bin]]
+name = "img-bitwise-or"
+path = "src/bin/img-bitwise-or.rs"
+
+[[bin]]
+name = "img-bitwise-xor"
+path = "src/bin/img-bitwise-xor.rs"
+
+[[bin]]
+name = "img-resize"
+path = "src/bin/img-resize.rs"
+
+[[bin]]
+name = "img-logo"
+path = "src/bin/img-logo.rs"
