@@ -3,12 +3,20 @@ use opencv::{core, highgui, imgcodecs};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-bitwise-or";
-    let img1 = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
-    let img2 = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
+    let window_name = "img-gaussian-blur";
+
+    let img = imgcodecs::imread("data/gaussian-blur-test.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut result = core::Mat::default();
-    core::bitwise_or(&img1, &img2, &mut result, &core::no_array())?;
+    opencv::imgproc::gaussian_blur(
+        &img,
+        &mut result,
+        core::Size::new(9, 9),
+        10.,
+        10.,
+        core::BORDER_DEFAULT,
+        // core::ALGO_HINT_DEFAULT,
+    )?;
 
     highgui::named_window(window_name, highgui::WINDOW_NORMAL)?;
     highgui::resize_window(window_name, w, h)?;

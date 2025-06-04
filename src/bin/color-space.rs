@@ -31,7 +31,7 @@ fn main() -> Result<()> {
     )?;
 
     let mut dst_img = opencv::core::Mat::default();
-    let src_img = imgcodecs::imread("color.png", imgcodecs::IMREAD_COLOR)?;
+    let src_img = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
 
     loop {
         let pos = highgui::get_trackbar_pos(trackbar_name, window_name)? as usize;

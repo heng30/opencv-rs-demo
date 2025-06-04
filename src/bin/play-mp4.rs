@@ -2,7 +2,7 @@ use anyhow::Result;
 use opencv::{core::Mat, highgui, prelude::*, videoio::VideoCapture};
 
 fn main() -> Result<()> {
-    let mut cap = VideoCapture::from_file("test.mp4", opencv::videoio::CAP_ANY)?;
+    let mut cap = VideoCapture::from_file("data/test.mp4", opencv::videoio::CAP_ANY)?;
 
     let fps = cap.get(opencv::videoio::CAP_PROP_FPS)?;
     let delay = (1000.0 / fps) as i32; // ms per frame

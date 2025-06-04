@@ -4,8 +4,8 @@ use opencv::{core, highgui, imgcodecs, prelude::*};
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
     let window_name = "img-cut-merge";
-    let img1 = imgcodecs::imread("color.png", imgcodecs::IMREAD_COLOR)?;
-    let img2 = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
+    let img1 = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
+    let img2 = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
 
     if img1.size()? != img2.size()? {
         anyhow::bail!("Images must have the same dimensions");

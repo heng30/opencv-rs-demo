@@ -4,8 +4,8 @@ use opencv::{core, highgui, imgcodecs};
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
     let window_name = "img-bitwise-and";
-    let img1 = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
-    let img2 = imgcodecs::imread("color.png", imgcodecs::IMREAD_COLOR)?;
+    let img1 = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
+    let img2 = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut result = core::Mat::default();
     core::bitwise_and(&img1, &img2, &mut result, &core::no_array())?;

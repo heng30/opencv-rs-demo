@@ -127,3 +127,43 @@ path = "src/bin/img-resize.rs"
 [[bin]]
 name = "img-logo"
 path = "src/bin/img-logo.rs"
+
+[[bin]]
+name = "img-flip"
+path = "src/bin/img-flip.rs"
+
+[[bin]]
+name = "img-rotate"
+path = "src/bin/img-rotate.rs"
+
+[[bin]]
+name = "img-affine"
+path = "src/bin/img-affine.rs"
+
+[[bin]]
+name = "img-affine-rotation"
+path = "src/bin/img-affine-rotation.rs"
+
+[[bin]]
+name = "img-affine-transform"
+path = "src/bin/img-affine-transform.rs"
+
+[[bin]]
+name = "img-perspective"
+path = "src/bin/img-perspective.rs"
+
+[[bin]]
+name = "img-filter-blur"
+path = "src/bin/img-filter-blur.rs"
+
+[[bin]]
+name = "img-blur"
+path = "src/bin/img-blur.rs"
+
+[[bin]]
+name = "img-gaussian-blur"
+path = "src/bin/img-gaussian-blur.rs"
+
+[[bin]]
+name = "img-median-blur"
+path = "src/bin/img-median-blur.rs"

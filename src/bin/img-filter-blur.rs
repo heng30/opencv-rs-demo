@@ -3,17 +3,23 @@ use opencv::{core, highgui, imgcodecs, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "imgmerge";
-    let img1 = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
-    let img2 = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
+    let window_name = "img-filter-blur";
 
-    if img1.size()? != img2.size()? {
-        anyhow::bail!("Images must have the same dimensions");
-    }
+    let img = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
 
-    // Alpha blending with weights (0.7 for img1, 0.3 for img2)
+    // blur
+    let kernel = (core::Mat::ones(5, 5, core::CV_32F)?.to_mat()? / 25.).into_result()?;
+
     let mut result = core::Mat::default();
-    core::add_weighted(&img1, 0.7, &img2, 0.3, 0.0, &mut result, -1)?;
+    opencv::imgproc::filter_2d(
+        &img,
+        &mut result,
+        -1,
+        &kernel,
+        core::Point::new(-1, -1),
+        0.,
+        core::BORDER_DEFAULT,
+    )?;
 
     highgui::named_window(window_name, highgui::WINDOW_NORMAL)?;
     highgui::resize_window(window_name, w, h)?;

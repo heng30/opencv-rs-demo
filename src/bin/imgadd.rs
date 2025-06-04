@@ -4,7 +4,7 @@ use opencv::{core, highgui, imgcodecs, prelude::*};
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
     let window_name = "imgadd";
-    let img = imgcodecs::imread("color.png", imgcodecs::IMREAD_COLOR)?;
+    let img = imgcodecs::imread("data/color.png", imgcodecs::IMREAD_COLOR)?;
 
     let rows = img.rows();
     let cols = img.cols();
@@ -12,7 +12,7 @@ fn main() -> Result<()> {
     println!("{rows}, {cols}, {channels}");
 
     if channels != 3 {
-        anyhow::bail!("color.png channels is not 3");
+        anyhow::bail!("data/color.png channels is not 3");
     }
 
     let mask = Mat::ones(rows, cols, core::CV_8UC3)?

@@ -3,7 +3,7 @@ use opencv::core::Vector;
 use opencv::{highgui, imgcodecs};
 
 fn main() -> Result<()> {
-    let input_img = "test.png";
+    let input_img = "data/test.png";
     let output_img = "target/output.jpeg";
 
     let img = imgcodecs::imread(input_img, imgcodecs::IMREAD_COLOR)?;

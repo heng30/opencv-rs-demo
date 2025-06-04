@@ -3,7 +3,7 @@ use opencv::{highgui, imgcodecs};
 
 fn main() -> Result<()> {
     let window_name = "window";
-    let img = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
+    let img = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
     highgui::named_window(window_name, highgui::WINDOW_NORMAL)?;
     highgui::resize_window(window_name, 640, 480)?;
     highgui::imshow(window_name, &img)?;

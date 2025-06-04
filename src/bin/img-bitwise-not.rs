@@ -4,7 +4,7 @@ use opencv::{core, highgui, imgcodecs};
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
     let window_name = "img-bitwise-not";
-    let img = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
+    let img = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut result = core::Mat::default();
     core::bitwise_not(&img, &mut result, &core::no_array())?;

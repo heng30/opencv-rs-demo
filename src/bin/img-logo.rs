@@ -54,7 +54,7 @@ fn main() -> Result<()> {
     )?;
 
     // make roi
-    let mut img = imgcodecs::imread("test.png", imgcodecs::IMREAD_COLOR)?;
+    let mut img = imgcodecs::imread("data/test.png", imgcodecs::IMREAD_COLOR)?;
 
     let logo_pos = core::Rect::new(50, 50, logo_size, logo_size);
     let mut img_roi = core::Mat::roi_mut(&mut img, logo_pos)?;
