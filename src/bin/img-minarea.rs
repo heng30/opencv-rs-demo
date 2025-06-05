@@ -1,9 +1,9 @@
 use anyhow::Result;
-use opencv::{core, highgui, imgcodecs, imgproc};
+use opencv::{core, highgui, imgcodecs, imgproc, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-minarea";
+    let window_name = "img-min-area";
 
     let mut gray = core::Mat::default();
     let mut img = imgcodecs::imread("data/hello.png", imgcodecs::IMREAD_COLOR)?;
@@ -45,14 +45,31 @@ fn main() -> Result<()> {
         core::Point::default(),
     )?;
 
-    // Draw bounding rectangle for contours[1]
-    let bounding_rect = opencv::imgproc::bounding_rect(&contours.get(1).unwrap())?;
+    // Draw min rectangel for contours[1]
+    let min_rect = opencv::imgproc::min_area_rect(&contours.get(1).unwrap())?;
 
-    opencv::imgproc::rectangle(
+    let mut min_rect_pts = core::Mat::default();
+    opencv::imgproc::box_points(min_rect, &mut min_rect_pts)?;
+
+    // println!("{:?}", min_rect_pts);
+
+    // Convert the Mat to Vector<Point> if needed for polylines
+    let mut points_vec = core::Vector::<core::Point>::new();
+    for i in 0..min_rect_pts.rows() {
+        let x = min_rect_pts.at_2d::<f32>(i, 0)?;
+        let y = min_rect_pts.at_2d::<f32>(i, 1)?;
+        points_vec.push(core::Point::new(x.round() as i32, y.round() as i32));
+    }
+
+    let mut pts = core::Vector::<core::Vector<core::Point>>::new();
+    pts.push(points_vec);
+
+    opencv::imgproc::polylines(
         &mut img,
-        bounding_rect,
+        &pts,
+        true,
         opencv::core::Scalar::new(255., 0., 0., 0.),
-        4,
+        8,
         opencv::imgproc::LINE_AA,
         0,
     )?;

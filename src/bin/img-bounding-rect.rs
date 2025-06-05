@@ -3,7 +3,7 @@ use opencv::{core, highgui, imgcodecs, imgproc};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-minarea";
+    let window_name = "img-bounding-rect";
 
     let mut gray = core::Mat::default();
     let mut img = imgcodecs::imread("data/hello.png", imgcodecs::IMREAD_COLOR)?;

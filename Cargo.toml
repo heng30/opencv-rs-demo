@@ -167,3 +167,91 @@ path = "src/bin/img-gaussian-blur.rs"
 [[bin]]
 name = "img-median-blur"
 path = "src/bin/img-median-blur.rs"
+
+[[bin]]
+name = "img-bilateral-filter"
+path = "src/bin/img-bilateral-filter.rs"
+
+[[bin]]
+name = "img-sobel"
+path = "src/bin/img-sobel.rs"
+
+[[bin]]
+name = "img-scharr"
+path = "src/bin/img-scharr.rs"
+
+[[bin]]
+name = "img-laplacian"
+path = "src/bin/img-laplacian.rs"
+
+[[bin]]
+name = "img-canny"
+path = "src/bin/img-canny.rs"
+
+[[bin]]
+name = "img-threshold"
+path = "src/bin/img-threshold.rs"
+
+[[bin]]
+name = "img-adaptive-threshold"
+path = "src/bin/img-adaptive-threshold.rs"
+
+[[bin]]
+name = "img-adaptive-threshold2"
+path = "src/bin/img-adaptive-threshold2.rs"
+
+[[bin]]
+name = "img-erode"
+path = "src/bin/img-erode.rs"
+
+[[bin]]
+name = "img-erode2"
+path = "src/bin/img-erode2.rs"
+
+[[bin]]
+name = "img-dilate"
+path = "src/bin/img-dilate.rs"
+
+[[bin]]
+name = "img-morphology-open"
+path = "src/bin/img-morphology-open.rs"
+
+[[bin]]
+name = "img-morphology-close"
+path = "src/bin/img-morphology-close.rs"
+
+[[bin]]
+name = "img-morphology-gradient"
+path = "src/bin/img-morphology-gradient.rs"
+
+[[bin]]
+name = "img-morphology-tophat"
+path = "src/bin/img-morphology-tophat.rs"
+
+[[bin]]
+name = "img-morphology-blackhat"
+path = "src/bin/img-morphology-blackhat.rs"
+
+[[bin]]
+name = "img-contours"
+path = "src/bin/img-contours.rs"
+
+[[bin]]
+name = "img-contour-area"
+path = "src/bin/img-contour-area.rs"
+
+[[bin]]
+name = "img-contour-arclength"
+path = "src/bin/img-contour-arclength.rs"
+
+[[bin]]
+name = "img-approx-hull"
+path = "src/bin/img-approx-hull.rs"
+
+[[bin]]
+name = "img-minarea"
+path = "src/bin/img-minarea.rs"
+
+[[bin]]
+name = "img-bounding-rect"
+path = "src/bin/img-bounding-rect.rs"
