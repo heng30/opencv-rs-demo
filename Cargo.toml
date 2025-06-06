@@ -255,3 +255,7 @@ path = "src/bin/img-minarea.rs"
 [[bin]]
 name = "img-bounding-rect"
 path = "src/bin/img-bounding-rect.rs"
+
+[[bin]]
+name = "car-detection"
+path = "src/bin/car-detection.rs"
