@@ -3,7 +3,7 @@ use opencv::{core, core::Mat, highgui, imgcodecs, imgproc, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-sift-descriptor";
+    let window_name = "img-sift";
 
     let mut img = imgcodecs::imread("data/chess.png", imgcodecs::IMREAD_COLOR)?;
 
@@ -11,10 +11,9 @@ fn main() -> Result<()> {
     let mut gray = Mat::default();
     imgproc::cvt_color(&img, &mut gray, imgproc::COLOR_BGR2GRAY, 0)?;
 
-    let mut surf = opencv::xfeatures2d::SURF::create_def()?;
+    let mut sift = opencv::features2d::SIFT::create_def()?;
     let mut kps = core::Vector::<core::KeyPoint>::new();
-    let mut dps = core::Mat::default();
-    surf.detect_and_compute_def(&gray, &core::no_array(), &mut kps, &mut dps)?;
+    sift.detect_def(&gray, &mut kps)?;
 
     opencv::features2d::draw_keypoints_def(&img.clone(), &kps, &mut img)?;
 

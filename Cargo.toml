@@ -259,3 +259,23 @@ path = "src/bin/img-bounding-rect.rs"
 [[bin]]
 name = "car-detection"
 path = "src/bin/car-detection.rs"
+
+[[bin]]
+name = "img-corner-harris"
+path = "src/bin/img-corner-harris.rs"
+
+[[bin]]
+name = "img-good-features-to-track"
+path = "src/bin/img-good-features-to-track.rs"
+
+[[bin]]
+name = "img-sift"
+path = "src/bin/img-sift.rs"
+
+[[bin]]
+name = "img-sift-descriptor"
+path = "src/bin/img-sift-descriptor.rs"
+
+[[bin]]
+name = "img-surf-descriptor"
+path = "src/bin/img-surf-descriptor.rs"

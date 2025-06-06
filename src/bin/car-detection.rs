@@ -141,6 +141,7 @@ fn main() -> Result<()> {
 
                 // println!("car counts: {car_counts}");
 
+                // 绘制检测线
                 opencv::imgproc::rectangle(
                     &mut src_frame,
                     bounding_rect,
@@ -151,6 +152,7 @@ fn main() -> Result<()> {
                 )?;
             }
 
+            // 绘制统计数据
             opencv::imgproc::put_text(
                 &mut src_frame,
                 &format!("Vehicle:{car_counts}"),

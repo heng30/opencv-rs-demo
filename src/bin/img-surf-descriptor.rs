@@ -3,7 +3,7 @@ use opencv::{core, core::Mat, highgui, imgcodecs, imgproc, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-sift-descriptor";
+    let window_name = "img-surf-descriptor";
 
     let mut img = imgcodecs::imread("data/chess.png", imgcodecs::IMREAD_COLOR)?;
 

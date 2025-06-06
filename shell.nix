@@ -11,7 +11,13 @@ pkgs.mkShell {
     pkgs.llvm
   ];
 
-  buildInputs = [ pkgs.opencv pkgs.libclang ];
+  buildInputs = [
+    (pkgs.opencv.override {
+      enableGtk3 = true;
+      enableUnfree = true;
+    })
+    pkgs.libclang
+  ];
 
   env = {
     LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
