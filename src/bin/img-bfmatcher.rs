@@ -3,7 +3,7 @@ use opencv::{core, core::Mat, highgui, imgcodecs, imgproc, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-flann-base-matcher";
+    let window_name = "img-bfmatcher";
 
     let img1 = imgcodecs::imread("data/opencv1.png", imgcodecs::IMREAD_COLOR)?;
     let img2 = imgcodecs::imread("data/opencv2.png", imgcodecs::IMREAD_COLOR)?;
@@ -26,42 +26,15 @@ fn main() -> Result<()> {
     sift.detect_and_compute_def(&gray2, &core::no_array(), &mut kps2, &mut dps2)?;
 
     // 创建匹配器
-    let mut flann = opencv::features2d::FlannBasedMatcher::new(
-        &core::Ptr::new(opencv::flann::IndexParams::from({
-            let mut p = opencv::flann::KDTreeIndexParams::new(5)?;
-            p.set_algorithm(1)?;
-            p
-        })),
-        &core::Ptr::new(opencv::flann::SearchParams::new_1(50, 0., true)?),
-    )?;
+    let mut bf = opencv::features2d::BFMatcher::create(core::NormTypes::NORM_L1.into(), false)?;
 
-    let mut matches = core::Vector::<core::Vector<core::DMatch>>::new();
-
-    opencv::prelude::FlannBasedMatcherTrait::add(&mut flann, &dps2)?;
-    flann.knn_match_def(&dps1, &mut matches, 1)?;
-
-    let mut good_matches = core::Vector::<core::Vector<core::DMatch>>::new();
-
-    for item in matches.into_iter() {
-        if item.len() == 1 {
-            good_matches.push(item);
-            continue;
-        }
-
-        // `flann.knn_match_def(&dps1, &mut matches, 2)?;`
-        let distance1 = item.get(0).unwrap().distance;
-        let distance2 = item.get(1).unwrap().distance;
-        println!("{distance1}, {distance2}");
-
-        // 算法有问题
-        if distance1 < distance2 * 0.7 {
-            good_matches.push(item);
-        }
-    }
+    let mut matches = core::Vector::<core::DMatch>::new();
+    bf.add(&dps2)?;
+    bf.match_(&dps1, &mut matches, &core::no_array())?;
 
     // 绘制匹配关系
     let mut img = Mat::default();
-    opencv::features2d::draw_matches_knn_def(&img1, &kps1, &img2, &kps2, &good_matches, &mut img)?;
+    opencv::features2d::draw_matches_def(&img1, &kps1, &img2, &kps2, &matches, &mut img)?;
 
     highgui::named_window(&window_name, highgui::WINDOW_NORMAL)?;
     highgui::resize_window(&window_name, w, h)?;

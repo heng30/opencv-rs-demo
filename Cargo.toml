@@ -279,3 +279,15 @@ path = "src/bin/img-sift-descriptor.rs"
 [[bin]]
 name = "img-surf-descriptor"
 path = "src/bin/img-surf-descriptor.rs"
+
+[[bin]]
+name = "img-orb-descriptor"
+path = "src/bin/img-orb-descriptor.rs"
+
+[[bin]]
+name = "img-bfmatcher"
+path = "src/bin/img-bfmatcher.rs"
+
+[[bin]]
+name = "img-flann-base-matcher"
+path = "src/bin/img-flann-base-matcher.rs"
