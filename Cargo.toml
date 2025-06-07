@@ -291,3 +291,7 @@ path = "src/bin/img-bfmatcher.rs"
 [[bin]]
 name = "img-flann-base-matcher"
 path = "src/bin/img-flann-base-matcher.rs"
+
+[[bin]]
+name = "img-draw-match-object"
+path = "src/bin/img-draw-match-object.rs"

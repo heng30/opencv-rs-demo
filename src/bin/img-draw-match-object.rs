@@ -3,10 +3,10 @@ use opencv::{core, core::Mat, highgui, imgcodecs, imgproc, prelude::*};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-flann-base-matcher";
+    let window_name = "img-draw-match-object";
 
     let img1 = imgcodecs::imread("data/opencv1.png", imgcodecs::IMREAD_COLOR)?;
-    let img2 = imgcodecs::imread("data/opencv2.png", imgcodecs::IMREAD_COLOR)?;
+    let mut img2 = imgcodecs::imread("data/opencv2.png", imgcodecs::IMREAD_COLOR)?;
 
     // 灰度
     let mut gray1 = Mat::default();
@@ -37,6 +37,7 @@ fn main() -> Result<()> {
 
     let mut matches = core::Vector::<core::Vector<core::DMatch>>::new();
 
+    // 进行匹配
     opencv::prelude::FlannBasedMatcherTrait::add(&mut flann, &dps2)?;
     flann.knn_match_def(&dps1, &mut matches, 1)?;
     // flann.knn_match_def(&dps1, &mut matches, 2)?;
@@ -57,6 +58,66 @@ fn main() -> Result<()> {
         if distance1 < distance2 * 0.7 {
             good_matches.push(item);
         }
+    }
+
+    if good_matches.len() >= 4 {
+        // 获取homography参数点列表
+        let mut src_pts = vec![];
+        for item in good_matches.iter() {
+            for item2 in item.iter() {
+                src_pts.push(kps1.get(item2.query_idx as usize).unwrap().pt());
+            }
+        }
+        let src_pts = Mat::from_slice(&src_pts)?;
+
+        let mut dst_pts = vec![];
+        for item in good_matches.iter() {
+            for item2 in item.iter() {
+                dst_pts.push(kps2.get(item2.train_idx as usize).unwrap().pt());
+            }
+        }
+        let dst_pts = Mat::from_slice(&dst_pts)?;
+
+        let homography = opencv::calib3d::find_homography(
+            &src_pts,
+            &dst_pts,
+            &mut core::Mat::default(),
+            opencv::calib3d::RANSAC,
+            5.0,
+        )?;
+        // println!("{:?}", homography);
+
+        let img1_width = img1.cols() as f32;
+        let img1_height = img1.rows() as f32;
+        let img1_corner_pts = Mat::from_slice_2d(&[
+            [0.0_f32, 0.0_f32],
+            [0.0_f32, img1_height - 1.],
+            [img1_width - 1., img1_height - 1.],
+            [img1_width - 1., 0.0_f32],
+        ])?;
+
+        let img1_corner_pts = img1_corner_pts.reshape(2, 4)?;
+
+        // println!("{:?}", img1_corner_pts);
+
+        let mut pt_dst = Mat::default();
+        core::perspective_transform(&img1_corner_pts, &mut pt_dst, &homography)?;
+        pt_dst.clone().convert_to_def(&mut pt_dst, core::CV_32SC2)?;
+
+        // println!("{:?}", pt_dst);
+
+        // 绘制包围框
+        opencv::imgproc::polylines(
+            &mut img2,
+            &pt_dst,
+            true,
+            opencv::core::Scalar::new(0., 255., 255., 0.),
+            1,
+            opencv::imgproc::LINE_AA,
+            0,
+        )?;
+    } else {
+        unreachable!("good_matches length than 4")
     }
 
     // 绘制匹配关系
