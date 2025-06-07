@@ -166,82 +166,12 @@ fn stitch_img(img1: &Mat, img2: &Mat, homography: &Mat) -> Result<Mat> {
         .convert_to_def(&mut img2_dims, core::CV_32FC2)?;
     let img2_dims = img2_dims.reshape(2, 4)?;
 
-    //获取变换后的坐标
+    //
     let mut img1_transform = Mat::default();
-    core::perspective_transform(&img1_dims, &mut img1_transform, &homography)?;
+    core::perspective_transform(&img1_corner_pts, &mut pt_dst, &homography)?;
+    pt_dst.clone().convert_to_def(&mut pt_dst, core::CV_32SC2)?;
+    println!("{:?}", pt_dst);
 
-    // 计算合成图像的大小
-    let mut img_dims = vec![];
-    for i in 0..img2_dims.rows() {
-        let p = img2_dims.at_2d::<core::Point2f>(i, 0)?;
-        img_dims.push(p);
-    }
-
-    for i in 0..img1_transform.rows() {
-        let p = img1_transform.at_2d::<core::Point2f>(i, 0)?;
-        img_dims.push(p);
-    }
-
-    // println!("{:?}", img_dims);
-
-    let (mut min_x, mut min_y, mut max_x, mut max_y) = (i32::MAX, i32::MAX, i32::MIN, i32::MIN);
-    for p in img_dims.iter() {
-        let px = p.x as i32;
-        let py = p.y as i32;
-
-        if min_x > px {
-            min_x = px;
-        }
-
-        if max_x < px {
-            max_x = px;
-        }
-
-        if min_y > py {
-            min_y = py;
-        }
-
-        if max_y < py {
-            max_y = py;
-        }
-    }
-
-    // println!("{min_x}, {min_y}, {max_x}, {max_y}");
-
-    // 创建平移矩阵
-    let transform_mat = Mat::from_slice_2d(&[
-        [1., 0., -min_x as f64],
-        [0., 1., -min_y as f64],
-        [0., 0., 1.],
-    ])?;
-
-    // 复合矩阵
-    let transform_mat = (transform_mat * homography).into_result()?;
-
-    // println!("{:?}", transform_mat);
-
-    // 绘制变换后的img1
     let mut img = Mat::default();
-    opencv::imgproc::warp_perspective_def(
-        &img1,
-        &mut img,
-        &transform_mat,
-        core::Size::new(max_x - min_x, max_y - min_y),
-    )?;
-
-    // 绘制变换后的img2
-    let roi_width = (w2 * 2).min(max_x - min_x) + min_x;
-    let roi_height = h2.min(max_y - min_y) + min_y;
-
-    let img_rect = core::Rect::new(-min_x, -min_y, roi_width, roi_height);
-    let img2_rect = core::Rect::new(0, 0, roi_width, roi_height);
-
-    // println!("{:?}", img_rect);
-    // println!("{:?}", img2_rect);
-
-    let mut img_roi = core::Mat::roi_mut(&mut img, img_rect)?;
-    let img2_roi = core::Mat::roi(img2, img2_rect)?;
-    img2_roi.copy_to(&mut img_roi)?;
-
     Ok(img)
 }
