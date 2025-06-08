@@ -299,3 +299,11 @@ path = "src/bin/img-draw-match-object.rs"
 [[bin]]
 name = "img-joint"
 path = "src/bin/img-joint.rs"
+
+[[bin]]
+name = "img-watershed"
+path = "src/bin/img-watershed.rs"
+
+[[bin]]
+name = "img-grabcut"
+path = "src/bin/img-grabcut.rs"

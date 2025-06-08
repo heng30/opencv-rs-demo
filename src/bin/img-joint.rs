@@ -6,7 +6,6 @@ fn main() -> Result<()> {
     let (img_w, img_h) = (640, 480);
     let window_name = "img-joint";
 
-    // 图片水平拼接
     let mut img1 = imgcodecs::imread("data/city-left.png", imgcodecs::IMREAD_COLOR)?;
     let mut img2 = imgcodecs::imread("data/city-right.png", imgcodecs::IMREAD_COLOR)?;
 
@@ -28,6 +27,7 @@ fn main() -> Result<()> {
         opencv::imgproc::INTER_AREA,
     )?;
 
+    // 图片水平拼接
     // let mut img = core::Mat::default();
     // core::hconcat2(&img2, &img1, &mut img)?;
 
@@ -38,22 +38,6 @@ fn main() -> Result<()> {
 
     // 进行图片拼接
     let img = stitch_img(&img1, &img2, &homography)?;
-
-    //
-    // // 绘制包围框
-    // opencv::imgproc::polylines(
-    //     &mut img2,
-    //     &pt_dst,
-    //     true,
-    //     opencv::core::Scalar::new(0., 255., 255., 0.),
-    //     1,
-    //     opencv::imgproc::LINE_AA,
-    //     0,
-    // )?;
-
-    // 绘制匹配关系
-    // let mut img = Mat::default();
-    // opencv::features2d::draw_matches_knn_def(&img1, &kps1, &img2, &kps2, &good_matches, &mut img)?;
 
     highgui::named_window(&window_name, highgui::WINDOW_NORMAL)?;
     highgui::resize_window(&window_name, w, h)?;
@@ -230,8 +214,8 @@ fn stitch_img(img1: &Mat, img2: &Mat, homography: &Mat) -> Result<Mat> {
     )?;
 
     // 绘制变换后的img2
-    let roi_width = (w2 * 2).min(max_x - min_x) + min_x;
-    let roi_height = h2.min(max_y - min_y) + min_y;
+    let roi_width = w2.min(max_x);
+    let roi_height = h2.min(max_y);
 
     let img_rect = core::Rect::new(-min_x, -min_y, roi_width, roi_height);
     let img2_rect = core::Rect::new(0, 0, roi_width, roi_height);

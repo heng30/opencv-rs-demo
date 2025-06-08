@@ -3,7 +3,7 @@ use opencv::{core, highgui, imgcodecs};
 
 fn main() -> Result<()> {
     let (w, h) = (640, 480);
-    let window_name = "img-adaptive-threshold";
+    let window_name = "img-dilate";
 
     let img = imgcodecs::imread("data/erode.png", imgcodecs::IMREAD_COLOR)?;
 
