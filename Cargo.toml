@@ -307,3 +307,39 @@ path = "src/bin/img-watershed.rs"
 [[bin]]
 name = "img-grabcut"
 path = "src/bin/img-grabcut.rs"
+
+[[bin]]
+name = "img-meanshift"
+path = "src/bin/img-meanshift.rs"
+
+[[bin]]
+name = "video-mog"
+path = "src/bin/video-mog.rs"
+
+[[bin]]
+name = "video-mog2"
+path = "src/bin/video-mog2.rs"
+
+[[bin]]
+name = "video-gmg"
+path = "src/bin/video-gmg.rs"
+
+[[bin]]
+name = "img-inpaint"
+path = "src/bin/img-inpaint.rs"
+
+[[bin]]
+name = "img-haar-face"
+path = "src/bin/img-haar-face.rs"
+
+[[bin]]
+name = "img-haar-all"
+path = "src/bin/img-haar-all.rs"
+
+[[bin]]
+name = "img-haar-car-number"
+path = "src/bin/img-haar-car-number.rs"
+
+[[bin]]
+name = "img-dnn-classifier"
+path = "src/bin/img-dnn-classifier.rs"
