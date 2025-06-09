@@ -343,3 +343,7 @@ path = "src/bin/img-haar-car-number.rs"
 [[bin]]
 name = "img-dnn-classifier"
 path = "src/bin/img-dnn-classifier.rs"
+
+[[bin]]
+name = "camera-face-detection"
+path = "src/bin/camera-face-detection.rs"
