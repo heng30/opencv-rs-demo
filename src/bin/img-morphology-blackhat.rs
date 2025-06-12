@@ -15,7 +15,7 @@ fn main() -> Result<()> {
 
     let mut result = core::Mat::default();
 
-    // 原图 - 闭运算
+    // 原图 - 闭运算 -> 获取主体内的噪声
     opencv::imgproc::morphology_ex(
         &img,
         &mut result,

@@ -39,8 +39,7 @@ fn main() -> Result<()> {
 
     // 进行匹配
     opencv::prelude::FlannBasedMatcherTrait::add(&mut flann, &dps2)?;
-    flann.knn_match_def(&dps1, &mut matches, 1)?;
-    // flann.knn_match_def(&dps1, &mut matches, 2)?;
+    flann.knn_match_def(&dps1, &mut matches, 2)?;
 
     let mut good_matches = core::Vector::<core::Vector<core::DMatch>>::new();
 
@@ -54,9 +53,8 @@ fn main() -> Result<()> {
         let distance2 = item.get(1).unwrap().distance;
         println!("{distance1}, {distance2}");
 
-        // 算法有问题
         if distance1 < distance2 * 0.7 {
-            good_matches.push(item);
+            good_matches.push(core::Vector::from_slice(&vec![item.get(0).unwrap()]));
         }
     }
 

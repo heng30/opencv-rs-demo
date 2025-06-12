@@ -95,9 +95,8 @@ fn get_homography(img1: &Mat, img2: &Mat) -> Result<Mat> {
         let distance2 = item.get(1).unwrap().distance;
         // println!("{distance1}, {distance2}");
 
-        // 算法有问题
         if distance1 < distance2 * 0.7 {
-            good_matches.push(item);
+            good_matches.push(core::Vector::from_slice(&vec![item.get(0).unwrap()]));
         }
     }
 

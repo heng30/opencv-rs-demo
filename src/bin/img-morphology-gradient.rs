@@ -14,6 +14,8 @@ fn main() -> Result<()> {
     )?;
 
     let mut result = core::Mat::default();
+
+    // 原图 - 腐蚀
     opencv::imgproc::morphology_ex(
         &img,
         &mut result,

@@ -347,3 +347,27 @@ path = "src/bin/img-dnn-classifier.rs"
 [[bin]]
 name = "camera-face-detection"
 path = "src/bin/camera-face-detection.rs"
+
+[[bin]]
+name = "img-prydown"
+path = "src/bin/img-prydown.rs"
+
+[[bin]]
+name = "img-pryup"
+path = "src/bin/img-pryup.rs"
+
+[[bin]]
+name = "img-calc-hist"
+path = "src/bin/img-calc-hist.rs"
+
+[[bin]]
+name = "mat-min-max-value"
+path = "src/bin/mat-min-max-value.rs"
+
+[[bin]]
+name = "draw-calculator"
+path = "src/bin/draw-calculator.rs"
+
+[[bin]]
+name = "img-match-template"
+path = "src/bin/img-match-template.rs"
