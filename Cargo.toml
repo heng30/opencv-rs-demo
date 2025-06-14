@@ -371,3 +371,11 @@ path = "src/bin/draw-calculator.rs"
 [[bin]]
 name = "img-match-template"
 path = "src/bin/img-match-template.rs"
+
+[[bin]]
+name = "img-multi-match-template"
+path = "src/bin/img-multi-match-template.rs"
+
+[[bin]]
+name = "img-card-number"
+path = "src/bin/img-card-number.rs"

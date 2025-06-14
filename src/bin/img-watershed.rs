@@ -69,7 +69,7 @@ fn main() -> Result<()> {
     // 暂时还不能确定是否是物体的区域
     let unknown = (&gray - &fg).into_result()?.to_mat()?;
 
-    // 创建连通域
+    // 创建连通域, 用0标记背景，用1标记前景
     let mut marker = Mat::default();
     opencv::imgproc::connected_components_def(&fg, &mut marker)?;
 
@@ -81,7 +81,7 @@ fn main() -> Result<()> {
                 // 未知区域设置为0, watershed会使用
                 *marker.at_2d_mut::<i32>(i, j)? = 0;
             } else {
-                // 背景区域设置为1，与unknown区域区分
+                // 背景区域设置为1，前景区域大于1, 与unknown区域区分
                 *marker.at_2d_mut::<i32>(i, j)? += 1;
             }
         }
@@ -89,10 +89,10 @@ fn main() -> Result<()> {
 
     // println!("{:?}", marker);
 
-    // 确定未知区域，从未获得物体轮廓
+    // 确定未知区域，从而获得物体轮廓
     opencv::imgproc::watershed(&img, &mut marker)?;
 
-    // 使用红色绘制图形边缘
+    // 使用红色绘制图形边缘, 背景为1, 前景大于1, 边缘区域为-1
     for i in 0..marker.rows() {
         for j in 0..marker.cols() {
             // 边缘区域

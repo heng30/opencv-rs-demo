@@ -141,7 +141,7 @@ fn main() -> Result<()> {
 
                 // println!("car counts: {car_counts}");
 
-                // 绘制检测线
+                // 绘制包围进行
                 opencv::imgproc::rectangle(
                     &mut src_frame,
                     bounding_rect,
