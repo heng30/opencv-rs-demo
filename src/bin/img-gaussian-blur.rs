@@ -15,7 +15,7 @@ fn main() -> Result<()> {
         10.,
         10.,
         core::BORDER_DEFAULT,
-        // core::ALGO_HINT_DEFAULT,
+        core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
     )?;
 
     highgui::named_window(window_name, highgui::WINDOW_NORMAL)?;

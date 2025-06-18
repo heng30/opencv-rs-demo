@@ -45,7 +45,13 @@ fn main() -> Result<()> {
             let mut src_frame = frame.clone();
 
             // 灰度
-            imgproc::cvt_color(&frame.clone(), &mut frame, imgproc::COLOR_BGR2GRAY, 0)?;
+            imgproc::cvt_color(
+                &frame.clone(),
+                &mut frame,
+                imgproc::COLOR_BGR2GRAY,
+                0,
+                opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+            )?;
 
             // 高斯降噪
             opencv::imgproc::gaussian_blur(
@@ -55,7 +61,7 @@ fn main() -> Result<()> {
                 5.,
                 5.,
                 core::BORDER_DEFAULT,
-                // core::ALGO_HINT_DEFAULT,
+                core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
             )?;
 
             // 去背景

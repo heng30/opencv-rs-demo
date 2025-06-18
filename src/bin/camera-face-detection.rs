@@ -3,7 +3,7 @@ use opencv::{
     core::{self, Mat, Rect, Vector},
     highgui, imgproc, objdetect,
     prelude::*,
-    videoio::{VideoCapture, CAP_ANY},
+    videoio::{CAP_ANY, VideoCapture},
 };
 
 fn main() -> Result<()> {
@@ -63,7 +63,13 @@ fn main() -> Result<()> {
 
                 // 转换为灰度图
                 let mut gray = Mat::default();
-                imgproc::cvt_color(&adjusted, &mut gray, imgproc::COLOR_BGR2GRAY, 0)?;
+                imgproc::cvt_color(
+                    &adjusted,
+                    &mut gray,
+                    imgproc::COLOR_BGR2GRAY,
+                    0,
+                    opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+                )?;
 
                 // 直方图均衡化增强对比度
                 imgproc::equalize_hist(&gray.clone(), &mut gray)?;
@@ -77,6 +83,7 @@ fn main() -> Result<()> {
                     0.0,
                     0.0,
                     core::BORDER_DEFAULT,
+                    core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
                 )?;
 
                 // highgui::imshow(&entries[index].0, &blurred)?;

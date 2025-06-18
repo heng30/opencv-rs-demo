@@ -26,7 +26,13 @@ fn main() -> Result<()> {
         opencv::imgproc::INTER_AREA,
     )?;
 
-    imgproc::cvt_color(&mask.clone(), &mut mask, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &mask.clone(),
+        &mut mask,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
     mask.clone().convert_to_def(&mut mask, core::CV_8UC1)?;
 
     // 由于img和mask有点对不齐，效果有点差

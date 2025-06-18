@@ -9,7 +9,13 @@ fn main() -> Result<()> {
     let mut img = imgcodecs::imread("data/hello.png", imgcodecs::IMREAD_COLOR)?;
 
     // Convert to grayscale
-    imgproc::cvt_color(&img, &mut gray, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &img,
+        &mut gray,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
 
     // Apply threshold
     let mut binary = core::Mat::default();

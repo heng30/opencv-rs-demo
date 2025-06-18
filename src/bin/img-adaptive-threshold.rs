@@ -13,7 +13,7 @@ fn main() -> Result<()> {
         &mut result,
         opencv::imgproc::ColorConversionCodes::COLOR_BGR2GRAY.into(),
         0,
-        // opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
     )?;
 
     opencv::imgproc::adaptive_threshold(

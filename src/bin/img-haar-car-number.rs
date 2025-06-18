@@ -11,7 +11,13 @@ fn main() -> Result<()> {
     let mut img = opencv::imgcodecs::imread("data/car.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut gray = Mat::default();
-    imgproc::cvt_color(&img, &mut gray, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &img,
+        &mut gray,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
 
     let mut car_number_objs = core::Vector::<core::Rect>::new();
     car_number_classifier.detect_multi_scale(

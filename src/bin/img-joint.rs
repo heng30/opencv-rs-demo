@@ -59,10 +59,22 @@ fn main() -> Result<()> {
 fn get_homography(img1: &Mat, img2: &Mat) -> Result<Mat> {
     // 灰度
     let mut gray1 = Mat::default();
-    imgproc::cvt_color(&img1, &mut gray1, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &img1,
+        &mut gray1,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
 
     let mut gray2 = Mat::default();
-    imgproc::cvt_color(&img2, &mut gray2, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &img2,
+        &mut gray2,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
 
     // 获取特征描述
     let mut sift = opencv::features2d::SIFT::create_def()?;

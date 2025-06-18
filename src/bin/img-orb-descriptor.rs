@@ -9,7 +9,13 @@ fn main() -> Result<()> {
 
     // 灰度
     let mut gray = Mat::default();
-    imgproc::cvt_color(&img, &mut gray, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &img,
+        &mut gray,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
 
     let mut orb = opencv::features2d::ORB::create_def()?;
     let mut kps = core::Vector::<core::KeyPoint>::new();

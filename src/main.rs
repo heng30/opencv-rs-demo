@@ -15,6 +15,7 @@ fn main() -> Result<()> {
         &mut img_template,
         opencv::imgproc::ColorConversionCodes::COLOR_BGR2GRAY.into(),
         0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
     )?;
 
     // 二值化
@@ -69,6 +70,7 @@ fn main() -> Result<()> {
         &mut img,
         opencv::imgproc::ColorConversionCodes::COLOR_BGR2GRAY.into(),
         0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
     )?;
 
     let kernel = opencv::imgproc::get_structuring_element(

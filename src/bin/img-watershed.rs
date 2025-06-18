@@ -8,7 +8,13 @@ fn main() -> Result<()> {
     let mut img = imgcodecs::imread("data/coins.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut gray = Mat::default();
-    imgproc::cvt_color(&img, &mut gray, imgproc::COLOR_BGR2GRAY, 0)?;
+    imgproc::cvt_color(
+        &img,
+        &mut gray,
+        imgproc::COLOR_BGR2GRAY,
+        0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+    )?;
 
     // 二值化
     opencv::imgproc::threshold(

@@ -1,9 +1,9 @@
 Include some opencv-rs demo.
 
 ## Environment
-- Rust version: rustc 1.82.0
-- Clang version: 18.1.8
-- OpenCV version: 4.9.0
+- Rust version: rustc 1.86.0
+- Clang version: 19.1.7
+- OpenCV version: 4.11.0
 
 ## Reference
 - [opencv tutorial](https://www.bilibili.com/BV1PSwQeEE4L)

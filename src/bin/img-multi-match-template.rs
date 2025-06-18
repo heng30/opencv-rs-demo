@@ -13,6 +13,7 @@ fn main() -> Result<()> {
         &mut img,
         opencv::imgproc::ColorConversionCodes::COLOR_BGR2GRAY.into(),
         0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
     )?;
 
     let mut img_template = imgcodecs::imread("data/mario-coin.png", imgcodecs::IMREAD_COLOR)?;
@@ -22,6 +23,7 @@ fn main() -> Result<()> {
         &mut img_template,
         opencv::imgproc::ColorConversionCodes::COLOR_BGR2GRAY.into(),
         0,
+        opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
     )?;
 
     let mut result = Mat::default();

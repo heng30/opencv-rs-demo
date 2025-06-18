@@ -1,22 +1,22 @@
 { pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
-  nativeBuildInputs = [
-    pkgs.pkg-config
-    pkgs.rustc
-    pkgs.cargo
-    pkgs.gcc
-    pkgs.gnumake
-    pkgs.clang
-    pkgs.llvm
+  nativeBuildInputs = with pkgs; [
+    pkg-config
+    rustc
+    cargo
+    gcc
+    gnumake
+    clang
+    llvm
   ];
 
-  buildInputs = [
-    (pkgs.opencv.override {
+  buildInputs = with pkgs; [
+    (opencv.override {
       enableGtk3 = true;
       enableUnfree = true;
     })
-    pkgs.libclang
+    libclang
   ];
 
   env = {

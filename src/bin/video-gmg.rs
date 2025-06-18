@@ -24,7 +24,12 @@ fn main() -> Result<()> {
 
         let mut frame = Mat::default();
         if let Ok(true) = cap.read(&mut frame) {
-            gmg.apply(&frame.clone(), &mut frame, -1.)?;
+            opencv::prelude::BackgroundSubtractorGMGTrait::apply(
+                &mut gmg,
+                &frame.clone(),
+                &mut frame,
+                -1.,
+            )?;
             highgui::imshow(window_name, &frame)?;
         }
 

@@ -40,7 +40,7 @@ fn main() -> Result<()> {
             &mut dst_img,
             color_space[pos].into(),
             0,
-            // opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
+            opencv::core::AlgorithmHint::ALGO_HINT_DEFAULT.into(),
         )?;
 
         highgui::imshow(window_name, &dst_img)?;
